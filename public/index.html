@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>윤대영 소개</title>
+<meta name="description" content="Java 백엔드를 준비하는 윤대영의 포트폴리오. 게임·드론·보안 프로젝트와 SKT 알레프 과제를 상황·행동·결과로 정리했습니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="윤대영 · 스스로 선택한 것에만 불이 붙는 사람">
+<meta property="og:description" content="Java 백엔드를 준비하는 윤대영의 포트폴리오. 게임·드론·보안 프로젝트와 SKT 알레프 과제를 상황·행동·결과로 정리했습니다.">
+<meta property="og:url" content="https://zaqxsw108091-create.github.io/about-me/">
+<meta property="og:image" content="https://zaqxsw108091-create.github.io/about-me/security.png">
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+  // 화면이 그려지기 전에 테마를 정해 깜빡임을 막는다
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  })();
+</script>
+<style>
+  :root {
+    --bg: #f3f6fb;
+    --surface: #ffffff;
+    --surface-2: #eef3fa;
+    --ink: #14213d;
+    --muted: #46536b;
+    --line: #d5deec;
+    --grid: rgba(31, 95, 191, 0.07);
+    --link: #1a56b0;
+    --focus: #1a56b0;
+    --tile: #f6f8fc;
+    --game: #6b4fa8;
+    --drone: #0b6fa3;
+    --security: #1e3a8a;
+    --vibe: #0f6e66;
+    --game-rgb: 107, 79, 168;
+    --drone-rgb: 11, 111, 163;
+    --security-rgb: 30, 58, 138;
+    --vibe-rgb: 15, 110, 102;
+    --shadow: rgba(20, 33, 61, 0.12);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0c1526;
+    --surface: #132039;
+    --surface-2: #182844;
+    --ink: #e7eef9;
+    --muted: #b0bdd3;
+    --line: #2a3f62;
+    --grid: rgba(127, 178, 255, 0.07);
+    --link: #8dbcff;
+    --focus: #8dbcff;
+    --tile: #eef2f8;
+    --game: #c2b0f2;
+    --drone: #74cbf2;
+    --security: #a9bdff;
+    --vibe: #6fd6c7;
+    --game-rgb: 194, 176, 242;
+    --drone-rgb: 116, 203, 242;
+    --security-rgb: 169, 189, 255;
+    --vibe-rgb: 111, 214, 199;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; overflow-x: hidden; }
+  body {
+    font-family: "IBM Plex Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    padding: 22px 40px 20px;
+    line-height: 1.5;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  a { color: var(--link); }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  .top-accent-bar {
+    position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 20;
+    background: linear-gradient(90deg, var(--game), var(--drone), var(--security));
+  }
+  .scroll-progress {
+    position: fixed; top: 4px; left: 0; height: 3px; width: 0; z-index: 19;
+    background: var(--vibe);
+  }
+
+  /* 히어로: 설계도 격자 */
+  header {
+    position: relative;
+    padding: 14px 18px 14px;
+    margin: 0 -18px;
+    border-radius: 14px;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  header h1 { margin: 0 0 6px 0; font-size: clamp(20px, 2.4vw, 30px); font-weight: 700; letter-spacing: -0.01em; }
+  header p { margin: 0; font-size: clamp(13px, 1.2vw, 15px); max-width: 900px; color: var(--ink); }
+  .contact-line { margin-top: 8px !important; font-size: clamp(12px, 1.1vw, 14px) !important; }
+  .theme-btn {
+    flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; font: inherit; font-size: 13px; font-weight: 500;
+    color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; cursor: pointer;
+  }
+  .theme-btn svg { width: 16px; height: 16px; }
+  .theme-btn:hover { border-color: var(--link); }
+
+  main { margin-top: 12px; }
+  h2 { margin: 0 0 8px 0; font-size: clamp(16px, 1.8vw, 20px); font-weight: 700; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px 0; padding: 0; list-style: none; justify-content: center; }
+  .tags li {
+    font-family: "IBM Plex Mono", Consolas, monospace; font-size: 11.5px;
+    padding: 2px 8px; border-radius: 6px;
+    color: var(--c); background: rgba(var(--c-rgb), 0.1);
+  }
+
+  /* 대표 3카드 */
+  .card-row { display: grid; grid-template-columns: repeat(3, 1fr); align-items: start; gap: 16px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c);
+    border-radius: 12px; padding: 14px 16px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card:hover, .card:focus-within { transform: translateY(-3px); box-shadow: 0 10px 22px var(--shadow); }
+  .game { --c: var(--game); --c-rgb: var(--game-rgb); }
+  .drone { --c: var(--drone); --c-rgb: var(--drone-rgb); }
+  .security { --c: var(--security); --c-rgb: var(--security-rgb); }
+  .vibe { --c: var(--vibe); --c-rgb: var(--vibe-rgb); }
+
+  .character-wrap { position: relative; display: inline-flex; align-items: center; transition: transform 0.4s ease; }
+  .card.is-open .character-wrap { transform: translate(-22px, -6px); }
+  .character-spin { display: inline-flex; transition: transform 0.4s ease; }
+  .card.is-open .character-spin { transform: rotate(-10deg); }
+  .char-tile { display: inline-flex; background: var(--tile); border-radius: 18px; padding: 4px; }
+  .card img { width: 108px; height: 108px; object-fit: contain; mix-blend-mode: multiply; }
+  .speech-bubble {
+    position: absolute; top: 10px; left: 100%; margin-left: 10px; width: 130px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px;
+    font-size: 11.5px; line-height: 1.35; color: var(--ink); text-align: left;
+    opacity: 0; transform: scale(0.85);
+    transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+  }
+  .card.is-open .speech-bubble { opacity: 1; transform: scale(1); }
+  .card h3 { margin: 6px 0 2px 0; font-size: clamp(15px, 1.5vw, 18px); color: var(--c); }
+  .summary { margin: 0 0 6px 0; font-size: 13px; color: var(--muted); }
+  .guide-btn {
+    margin: 0 0 8px 0; padding: 6px 16px; font: inherit; font-size: 13px; font-weight: 500;
+    color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; cursor: pointer;
+  }
+  .guide-btn:hover { border-color: var(--c); }
+
+  .details-wrapper, .acc-panel { display: grid; grid-template-rows: 0fr; width: 100%; transition: grid-template-rows 0.35s ease 0.15s; }
+  .details-wrapper.expanded, .acc-panel.expanded { grid-template-rows: 1fr; }
+  .details-inner, .acc-inner { overflow: hidden; min-height: 0; }
+
+  dl { margin: 0; text-align: left; width: 100%; }
+  dt { font-size: 12px; font-weight: 700; margin: 8px 0 2px 0; }
+  dt:first-child { margin-top: 0; }
+  dd { margin: 0; font-size: 13px; line-height: 1.5; }
+  .source-list { margin: 0; padding: 0; list-style: none; }
+
+  /* 더 만든 것들 */
+  .more { margin-top: 28px; }
+  .more-intro { margin: 0 0 12px 0; font-size: clamp(13px, 1.2vw, 15px); color: var(--muted); }
+  .group-title {
+    display: flex; align-items: center; gap: 10px;
+    margin: 16px 0 10px 0; font-size: 15px; font-weight: 700; color: var(--ink);
+  }
+  .group-title::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .more-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+  .more-card {
+    background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--c);
+    border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .more-card:hover, .more-card:focus-within { transform: translateY(-3px); box-shadow: 0 10px 22px var(--shadow); }
+  .more-card h4 { margin: 0 0 6px 0; font-size: 15.5px; color: var(--c); }
+  .more-card .tags { justify-content: flex-start; }
+  .more-card dl { flex: 1 1 auto; }
+  .ai-note {
+    margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--surface-2);
+    font-size: 12.5px; line-height: 1.5;
+  }
+  .ai-note p { margin: 0; }
+  .ai-note b { font-weight: 700; }
+  .more-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .link-btn {
+    display: inline-block; padding: 6px 14px; font-size: 13px; font-weight: 500;
+    color: var(--c); background: transparent; border: 1px solid var(--c);
+    border-radius: 999px; text-decoration: none;
+  }
+  .link-btn:hover { background: rgba(var(--c-rgb), 0.12); }
+
+  /* 접이식 */
+  footer { margin-top: 26px; display: flex; flex-direction: column; gap: 6px; }
+  .acc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+  .acc h2 { margin: 0; font-size: clamp(13px, 1.2vw, 15px); }
+  .acc-btn {
+    width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+    font: inherit; font-weight: 700; color: var(--ink); background: none; border: 0; border-radius: 10px; cursor: pointer; text-align: left;
+  }
+  .acc-btn:hover { background: var(--surface-2); }
+  .acc-plus { position: relative; width: 14px; height: 14px; flex: 0 0 auto; transition: transform 0.3s ease; }
+  .acc-plus::before, .acc-plus::after { content: ""; position: absolute; background: var(--ink); }
+  .acc-plus::before { left: 0; right: 0; top: 6px; height: 2px; }
+  .acc-plus::after { top: 0; bottom: 0; left: 6px; width: 2px; }
+  .acc-btn[aria-expanded="true"] .acc-plus { transform: rotate(45deg); }
+  .acc-ico { width: 18px; height: 18px; color: var(--link); flex: 0 0 auto; }
+  .acc-inner > div { padding: 2px 16px 14px 40px; }
+  .acc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; }
+  .acc h3 { margin: 8px 0 2px 0; font-size: 14px; }
+  .acc p, .acc li { font-size: 14px; line-height: 1.55; }
+  .acc p { margin: 2px 0 0 0; }
+  .acc ul, .acc ol { margin: 4px 0 8px 0; padding-left: 20px; }
+  .acc li { margin-bottom: 4px; }
+  .strengths { list-style: none; padding: 0 !important; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; }
+  .strengths li { margin: 0; }
+  .strengths b { display: block; color: var(--link); }
+
+  .motion-toggle { display: flex; align-items: center; gap: 6px; font-size: 14px; margin: 8px 0 0 0; }
+
+  html.motion-off *, html.motion-off *::before, html.motion-off *::after { transition: none !important; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+  }
+  @media (max-width: 1000px) { .more-row { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 800px) {
+    body { padding: 22px 16px 20px; }
+    header { margin: 0 -8px; padding: 12px 8px; }
+    .card-row, .more-row, .acc-cols, .strengths { grid-template-columns: 1fr; }
+    .acc-inner > div { padding-left: 16px; }
+  }
+</style>
+<link rel="stylesheet" href="private.css">
+</head>
+<body>
+  <div class="top-accent-bar" aria-hidden="true"></div>
+  <div class="scroll-progress" id="progress" aria-hidden="true"></div>
+
+  <header>
+    <div class="hero-top">
+      <h1>윤대영 · 스스로 선택한 것에만 불이 붙는 사람</h1>
+      <button type="button" class="theme-btn" id="theme-btn" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <span id="theme-label">다크 모드</span>
+      </button>
+    </div>
+    <p>흥미로운 걸 좋아하고, 남들과 다른 관점을 가지고 있어 직접 만들어보는 사람입니다. 게임·드론·보안을 만들어보며 개발을 배웠고, 지금은 Java 백엔드로 기초를 다지고 있습니다. 이 페이지는 저를 채용할지 검토하는 분께 제가 무엇을 만들어봤는지 보여주기 위한 곳입니다.</p>
+    <p class="contact-line">
+      <a href="https://github.com/zaqxsw108091-create" target="_blank" rel="noopener">GitHub</a>
+      · <a href="mailto:zaqxsw108091@gmail.com">zaqxsw108091@gmail.com</a>
+    </p>
+  </header>
+
+  <main>
+    <h2>무엇을 만드나요</h2>
+    <div class="card-row">
+      <article class="card game">
+        <div class="character-wrap">
+          <div class="character-spin"><span class="char-tile"><img src="game.png" alt="" aria-hidden="true"></span></div>
+          <div class="speech-bubble" aria-hidden="true">제가 만든 게임들을 소개할게요</div>
+        </div>
+        <h3>게임</h3>
+        <p class="summary">레이싱 → 2DCombat → FPS, 게임 3개를 순서대로 완성</p>
+        <ul class="tags" aria-label="사용 기술"><li>C#</li><li>Unity</li><li>JavaScript</li></ul>
+        <button type="button" class="guide-btn" aria-expanded="false" aria-controls="details-game">가이드 부르기</button>
+        <div class="details-wrapper" id="details-game" aria-hidden="true">
+          <div class="details-inner">
+            <dl>
+              <dt>상황</dt>
+              <dd>C를 배운 게 게임을 만들고 싶어서였다. 레이싱 게임을 시작으로, 수업 지도를 받으며 2DCombat을, 그 뒤엔 좋아하던 게임의 감각을 살려 레이캐스팅 FPS OVER_SHOT을 만들었다</dd>
+              <dt>행동</dt>
+              <dd>3개를 순서대로 만들며 배운 걸 다음 프로젝트에 쌓아갔고, 지금은 Java로 방향을 옮겨 기초를 다지는 중이다</dd>
+              <dt>결과</dt>
+              <dd>세 저장소 모두 공개돼 있고 각각 클론해서 실행해볼 수 있다</dd>
+              <dt>소스</dt>
+              <dd>
+                <ul class="source-list">
+                  <li><a href="https://github.com/zaqxsw108091-create/formula-one-racing" target="_blank" rel="noopener">formula-one-racing</a></li>
+                  <li><a href="https://github.com/zaqxsw108091-create/2DCombat" target="_blank" rel="noopener">2DCombat</a></li>
+                  <li><a href="https://github.com/zaqxsw108091-create/OVER_SHOT" target="_blank" rel="noopener">OVER_SHOT</a></li>
+                </ul>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </article>
+
+      <article class="card drone">
+        <div class="character-wrap">
+          <div class="character-spin"><span class="char-tile"><img src="drone.png" alt="" aria-hidden="true"></span></div>
+          <div class="speech-bubble" aria-hidden="true">드론 시뮬레이터 이야기예요</div>
+        </div>
+        <h3>드론</h3>
+        <p class="summary">드론과 미션을 골라 비행하는 시뮬레이터</p>
+        <ul class="tags" aria-label="사용 기술"><li>JavaScript</li></ul>
+        <button type="button" class="guide-btn" aria-expanded="false" aria-controls="details-drone">가이드 부르기</button>
+        <div class="details-wrapper" id="details-drone" aria-hidden="true">
+          <div class="details-inner">
+            <dl>
+              <dt>상황</dt>
+              <dd>DJI 매빅을 직접 날리면서 드론의 움직임에 관심이 생겼지만, 실제 기체로 이것저것 시도해보기엔 부담이 컸다</dd>
+              <dt>행동</dt>
+              <dd>비행 거동을 코드로 확인해보려고 DRSIM_K 시뮬레이터를 만들었다</dd>
+              <dt>결과</dt>
+              <dd>메인 화면에서 드론과 미션을 고르면 해당 미션이 시작된다</dd>
+              <dt>소스</dt>
+              <dd><a href="https://github.com/zaqxsw108091-create/DRSIM_K" target="_blank" rel="noopener">DRSIM_K</a></dd>
+            </dl>
+          </div>
+        </div>
+      </article>
+
+      <article class="card security">
+        <div class="character-wrap">
+          <div class="character-spin"><span class="char-tile"><img src="security.png" alt="" aria-hidden="true"></span></div>
+          <div class="speech-bubble" aria-hidden="true">막는 쪽을 만들어봤어요</div>
+        </div>
+        <h3>보안</h3>
+        <p class="summary">로그인 공격을 막고 기록하는 방어 시스템 이지스</p>
+        <ul class="tags" aria-label="사용 기술"><li>Java</li><li>Spring Boot</li><li>Spring Security</li></ul>
+        <button type="button" class="guide-btn" aria-expanded="false" aria-controls="details-security">가이드 부르기</button>
+        <div class="details-wrapper" id="details-security" aria-hidden="true">
+          <div class="details-inner">
+            <dl>
+              <dt>상황</dt>
+              <dd>해킹 대회 영상을 보다 흥미가 생겼는데 공격 기술은 아직 모른다. 대신 막는 쪽 구현이 궁금했다</dd>
+              <dt>행동</dt>
+              <dd>로그인 실패를 IP·계정별로 세어 자동으로 차단·잠그고, 관리자 화면에서 실패 횟수를 확인하고 직접 차단·해제할 수 있는 방어 시스템(이지스)을 만들었다</dd>
+              <dt>결과</dt>
+              <dd>실패가 쌓인 IP가 목록에 뜨고, 차단하면 그 IP의 로그인이 막히는 것을 확인했다. 코드를 올릴 때마다 GitHub Actions로 빌드와 테스트가 자동으로 돈다</dd>
+              <dt>소스</dt>
+              <dd><a href="https://github.com/zaqxsw108091-create/aegis" target="_blank" rel="noopener">aegis</a></dd>
+            </dl>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <section class="more" aria-labelledby="more-title">
+      <h2 id="more-title">더 만든 것들</h2>
+      <p class="more-intro">위 3개 외에도 같은 방식으로 계획하고 완성까지 끝낸 프로젝트들입니다.</p>
+
+      <h3 class="group-title">SKT 알레프 과제</h3>
+      <div class="more-row">
+        <article class="more-card vibe">
+          <h4>이 페이지 (about-me)</h4>
+          <ul class="tags" aria-label="사용 기술"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          <dl>
+            <dt>상황</dt>
+            <dd>SKT 알레프 과제 1로 자기소개 페이지 제작을 지시받았다</dd>
+            <dt>행동</dt>
+            <dd>CLAUDE.md로 규칙 파일을 먼저 쓰고, 공개 범위를 직접 정한 뒤 바이브 코딩으로 구현했다. 지금은 ZTNA 방어 모듈(BYTE BACK)을 진행 중이다</dd>
+            <dt>결과</dt>
+            <dd>배포를 마쳤고, 과제 제출·승인까지 완료됐다</dd>
+          </dl>
+          <div class="more-links">
+            <a class="link-btn" href="https://github.com/zaqxsw108091-create/about-me" target="_blank" rel="noopener">소스 보기</a>
+            <a class="link-btn" href="https://zaqxsw108091-create.github.io/about-me/" target="_blank" rel="noopener">배포 페이지</a>
+          </div>
+        </article>
+
+        <article class="more-card vibe">
+          <h4>오늘의 진짜 정보판 (Exchange-rate)</h4>
+          <ul class="tags" aria-label="사용 기술"><li>JavaScript</li><li>외부 API</li></ul>
+          <dl>
+            <dt>상황</dt>
+            <dd>SKT 알레프 과제 4로, 외부 API가 실패해도 그 상태를 숨기지 않는 실시간 정보판을 만들어야 했다</dd>
+            <dt>행동</dt>
+            <dd>키 없이 쓰는 Frankfurter API로 달러/원 환율을 받아, 실패 5가지(느림·접근 거부·호출 제한·오프라인·형식 변경)를 화면에 구분해 보여주고 1초→2초→4초 간격으로 재시도하게 했다</dd>
+            <dt>결과</dt>
+            <dd>배포 화면이 옛 API 주소로 실패하던 문제를 직접 찾아 새 주소로 바꿔 해결했다</dd>
+          </dl>
+          <div class="ai-note">
+            <p><b>내가 정한 것</b> 데이터(환율)와 API 선택</p>
+            <p><b>AI가 짠 것</b> 화면, 재시도 로직, 테스트 코드</p>
+            <p><b>내가 고친 것</b> API 주소 교체, 두 컴퓨터 작업 충돌 해결</p>
+          </div>
+          <div class="more-links">
+            <a class="link-btn" href="https://github.com/zaqxsw108091-create/Exchange-rate" target="_blank" rel="noopener">소스 보기</a>
+            <a class="link-btn" href="https://zaqxsw108091-create.github.io/Exchange-rate/" target="_blank" rel="noopener">배포 페이지</a>
+          </div>
+        </article>
+
+        <article class="more-card vibe">
+          <h4>플랜두씨 다이어리 (plan-do-see)</h4>
+          <ul class="tags" aria-label="사용 기술"><li>JavaScript</li><li>Firebase Firestore</li></ul>
+          <dl>
+            <dt>상황</dt>
+            <dd>SKT 알레프 과제 6. 할 일 앱은 '했다/안 했다'만 남아서, 계획과 실제가 얼마나 달랐는지 돌아볼 수 없었다</dd>
+            <dt>행동</dt>
+            <dd>계획→할 일→실행 기록→돌아보기를 하나로 잇고, 완료 버튼을 연타하거나 다른 탭에서 눌러도 실행 기록이 1건만 남도록 서버 트랜잭션에서 한 번 더 확인하게 했다. 시간은 어디서 열든 한국 시간으로 저장한다</dd>
+            <dt>결과</dt>
+            <dd>Playwright 자동 테스트 35개 항목을 통과했다</dd>
+          </dl>
+          <div class="ai-note">
+            <p><b>내가 정한 것</b> Firebase 전환, 결과물·소스를 GitHub 한 곳에</p>
+            <p><b>AI가 짠 것</b> 화면·저장 코드, 자동 테스트</p>
+            <p><b>내가 고친 것</b> '없음' 입력이 막힘으로 집계되는 버그 발견</p>
+          </div>
+          <div class="more-links">
+            <a class="link-btn" href="https://github.com/zaqxsw108091-create/plan-do-see" target="_blank" rel="noopener">소스 보기</a>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="group-title">개인 프로젝트</h3>
+      <div class="more-row">
+        <article class="more-card vibe">
+          <h4>touch-flip</h4>
+          <ul class="tags" aria-label="사용 기술"><li>TypeScript</li><li>Spring Boot</li><li>WebSocket</li></ul>
+          <dl>
+            <dt>상황</dt>
+            <dd>2인 터치 카드 대전 게임을 만들면서 "같은 조건에서 겨루는 공정함"이 핵심 과제였다</dd>
+            <dt>행동</dt>
+            <dd>입력을 하나의 진입점(InputGovernor)으로만 받게 분리하고, 카드 크기를 화면 비율 대신 물리 크기(16mm)로 고정해 화면 크기 유불리를 없앴다. 온라인 대전은 Spring Boot WebSocket 서버가 유일한 판정 권위를 갖도록 구현했다</dd>
+            <dt>결과</dt>
+            <dd>로컬·온라인 두 모드가 동작하는 버전을 완성해 공개했고, 핵심 로직에 유닛 테스트를 붙여 검증했다</dd>
+          </dl>
+          <div class="more-links">
+            <a class="link-btn" href="https://github.com/zaqxsw108091-create/touch-flip" target="_blank" rel="noopener">소스 보기</a>
+          </div>
+        </article>
+
+        <article class="more-card vibe">
+          <h4>하찮은 속보 (petty-news)</h4>
+          <ul class="tags" aria-label="사용 기술"><li>React Native</li><li>Granite</li></ul>
+          <dl>
+            <dt>상황</dt>
+            <dd>토스 앱인토스 8월 바이브 코딩 챌린지에 참가했다</dd>
+            <dt>행동</dt>
+            <dd>Granite/React Native 프레임워크로 제작해 .ait 파일로 빌드했다</dd>
+            <dt>결과</dt>
+            <dd>2026-08-26 20260825-10 버전으로 앱인토스에 정식 출시를 완료했다</dd>
+          </dl>
+          <div class="more-links">
+            <a class="link-btn" href="https://github.com/zaqxsw108091-create/petty-news" target="_blank" rel="noopener">소스 보기</a>
+          </div>
+        </article>
+
+        <article class="more-card vibe">
+          <h4>에코 파크 (echo-park)</h4>
+          <ul class="tags" aria-label="사용 기술"><li>Phaser 3</li><li>Electron</li><li>PWA</li></ul>
+          <dl>
+            <dt>상황</dt>
+            <dd>협동 퍼즐 플랫포머를 만들고 싶었지만, 사람이 안 모여도 혼자 즐길 수 있어야 했다</dd>
+            <dt>행동</dt>
+            <dd>자신의 행동을 녹화해 루프로 재생하는 에코 시스템을 설계해, 혼자서도 과거의 나와 함께 동시 버튼 누르기 같은 협동 퍼즐을 풀 수 있게 했다</dd>
+            <dt>결과</dt>
+            <dd>1~4인(플레이어 1명 + NPC 최대 3명)으로 설치 없이 브라우저에서 바로 플레이할 수 있다</dd>
+          </dl>
+          <div class="more-links">
+            <a class="link-btn" href="https://github.com/zaqxsw108091-create/echo-park" target="_blank" rel="noopener">소스 보기</a>
+            <a class="link-btn" href="https://zaqxsw108091-create.github.io/echo-park/ECHO_PARK/game.html" target="_blank" rel="noopener">플레이하기</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="acc">
+      <h2><button type="button" class="acc-btn" aria-expanded="false" aria-controls="acc-strength">
+        <span class="acc-plus" aria-hidden="true"></span>
+        <svg class="acc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+        강점</button></h2>
+      <div class="acc-panel" id="acc-strength" aria-hidden="true"><div class="acc-inner"><div>
+        <ul class="strengths">
+          <li><b>문제를 먼저 찾는다</b>플랜두씨 다이어리를 직접 써보다가, '없음'이라고 적은 기록이 막힘으로 잘못 집계되는 버그를 찾아 입력 방식을 바꿨다</li>
+          <li><b>내 판단으로 결정한다</b>이 페이지를 만들 때 AI가 제안한 '캐릭터 하나가 안내하는 방식' 대신 분야별 전담 캐릭터 3개로 바꿨다</li>
+          <li><b>끝까지 완성한다</b>하찮은 속보를 챌린지 마감에 맞춰 앱인토스에 정식 출시했다</li>
+          <li><b>상대에 맞춰 판단한다</b>중학교 때 고등학교 진학을 고민하던 친구들의 성적·공부 방식·평소 습관을 보고 각자에게 맞는 학교를 추천해줬다</li>
+          <li><b>함께 준비하고 앞에 선다</b>고등학교 금융 발표 과제에서 조원들과 JP모건·골드만삭스·뱅크오브아메리카와 월가 자료를 함께 찾고, 발표는 내가 맡았다</li>
+          <li><b>목표를 정하면 해낸다</b>한국사능력검정시험 3급과 1급을 각각 한 번에 합격했고, 도전골든벨에 도 대표로 출전해 50문제 중 36번까지 생존했다</li>
+        </ul>
+      </div></div></div>
+    </div>
+
+    <div class="acc">
+      <h2><button type="button" class="acc-btn" aria-expanded="false" aria-controls="acc-work">
+        <span class="acc-plus" aria-hidden="true"></span>
+        <svg class="acc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+        일하는 방식</button></h2>
+      <div class="acc-panel" id="acc-work" aria-hidden="true"><div class="acc-inner"><div class="acc-cols">
+        <div>
+          <h3>몰입할 때</h3>
+          <p>흥미로운 것, 스스로 원해서 하는 일</p>
+          <h3>힘 빠질 때</h3>
+          <p>자신의 방식을 강요받거나 억지로 해야 할 때</p>
+        </div>
+        <div>
+          <h3>핵심 가치</h3>
+          <p>희망(할 수 있다는 믿음) · 신뢰 · 질서</p>
+          <p>궁금한 게 많고, 새로운 방식에 열려 있는 걸 좋아합니다.</p>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc">
+      <h2><button type="button" class="acc-btn" aria-expanded="false" aria-controls="acc-make">
+        <span class="acc-plus" aria-hidden="true"></span>
+        <svg class="acc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5 5L3 18l3 3 6.7-6.7a4 4 0 0 0 5-5l-2.4 2.4-2.6-.6-.6-2.6z"/></svg>
+        만드는 방식</button></h2>
+      <div class="acc-panel" id="acc-make" aria-hidden="true"><div class="acc-inner"><div class="acc-cols">
+        <p>무엇을 만들든 계획부터 세우고 시작합니다. 이 페이지도 규칙 파일(CLAUDE.md)을 먼저 쓰고, 공개할 것과 안 할 것을 정한 뒤에 코드를 작성했습니다. 기획과 기능은 제가 정하고, 코드는 AI에게 맡긴 뒤 직접 써보며 고칩니다.</p>
+        <ol>
+          <li>계획 세우기</li>
+          <li>규칙 파일(CLAUDE.md) 쓰기</li>
+          <li>공개할 것과 안 할 것 정하기</li>
+          <li>AI와 코드 작성, 직접 써보며 수정</li>
+        </ol>
+      </div></div></div>
+    </div>
+
+    <div class="acc">
+      <h2><button type="button" class="acc-btn" aria-expanded="false" aria-controls="acc-public">
+        <span class="acc-plus" aria-hidden="true"></span>
+        <svg class="acc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        공개 범위</button></h2>
+      <div class="acc-panel" id="acc-public" aria-hidden="true"><div class="acc-inner"><div class="acc-cols">
+        <div>
+          <h3>공개</h3>
+          <ul>
+            <li>이름과 소개</li>
+            <li>만든 프로젝트와 소스 저장소</li>
+            <li>GitHub·이메일</li>
+          </ul>
+        </div>
+        <div>
+          <h3>비공개</h3>
+          <ul>
+            <li>생년월일 — 채용 판단에 불필요</li>
+            <li>주소·전화번호 — 유포 범위 통제 불가</li>
+            <li>이지스 운영 비밀값(JWT 시크릿·DB 비밀번호) — 저장소에도 올리지 않음</li>
+          </ul>
+        </div>
+      </div></div></div>
+    </div>
+
+    <p class="motion-toggle">
+      <input type="checkbox" id="motion-off">
+      <label for="motion-off">움직임 끄기</label>
+    </p>
+  </footer>
+
+  <!-- ===== 과제 8: 나만 들어가기 (패스키) — 위쪽은 과제 1 페이지 그대로 ===== -->
+
+  <section class="private-zone" id="private-zone" aria-labelledby="pz-title">
+    <h2 id="pz-title">나만 들어가기 <span class="pz-badge">패스키</span></h2>
+    <p class="more-intro">위 소개는 누구나 볼 수 있습니다. 이 아래는 패스키로 로그인한 사람에게만 서버가 보여주는 비공개 공간입니다. 비밀번호는 없습니다.</p>
+
+    <p id="pz-status" class="pz-status" role="status" aria-live="polite" hidden></p>
+    <ol id="pz-flow" class="pz-flow" aria-label="이번 인증 흐름 기록" hidden></ol>
+
+    <div id="pz-guest">
+      <div class="pz-grid">
+        <div class="pz-panel">
+          <h3>이미 패스키가 있어요</h3>
+          <p>버튼을 누르면 이 기기가 서버가 낸 새 문제(챌린지)에 서명합니다. 아이디도 비밀번호도 입력하지 않습니다.</p>
+          <button type="button" class="pz-btn primary" id="btn-login">패스키로 들어가기</button>
+        </div>
+        <form class="pz-panel" id="form-register" autocomplete="off">
+          <h3>처음이에요 — 계정과 패스키 만들기</h3>
+          <p id="reg-limit" class="pz-small" hidden>이 사이트는 계정을 최대 2개까지만 만들 수 있고, 지금은 가득 찼습니다.</p>
+          <label for="reg-account">계정 이름 <small>(진짜 이름 대신 별명을 쓰세요 · 2~20자)</small></label>
+          <input type="text" id="reg-account" maxlength="20" required autocomplete="off">
+          <label for="reg-passkey">이 패스키의 이름 <small>(예: 내 휴대폰)</small></label>
+          <input type="text" id="reg-passkey" maxlength="30" required autocomplete="off">
+          <div id="reg-invite-wrap" hidden>
+            <label for="reg-invite">초대 코드 <small>(이 사이트 주인이 알려준 코드)</small></label>
+            <input type="text" id="reg-invite" maxlength="60" autocomplete="off">
+          </div>
+          <button type="submit" class="pz-btn primary" id="btn-register">패스키 만들기</button>
+        </form>
+      </div>
+      <details class="pz-explain">
+        <summary>패스키가 뭔가요? 어디에 저장되나요?</summary>
+        <ul>
+          <li><b>열쇠 한 쌍입니다.</b> 만들 때 이 기기 안에서 공개 키와 개인 키가 한 쌍으로 생깁니다.</li>
+          <li><b>서버에는 공개 키만 저장합니다.</b> 공개 키는 비밀번호가 아니라 "서명이 맞는지 확인하는 자물쇠 모양"이라서, 알려져도 그것만으로는 로그인할 수 없습니다.</li>
+          <li><b>개인 키는 서버로 보내지 않습니다.</b> 이 기기의 보안 칩이나 비밀번호 관리자 안에만 남고, 지문·얼굴·화면 잠금으로 풀어야 쓸 수 있습니다.</li>
+          <li><b>로그인할 때마다 서버가 새 문제를 냅니다.</b> 기기가 개인 키로 그 문제에 서명하고, 서버는 공개 키로 확인합니다. 한 번 쓴 문제는 바로 폐기됩니다.</li>
+          <li><b>만들다가 취소하면</b> 서버에는 아무것도 저장되지 않습니다.</li>
+        </ul>
+      </details>
+    </div>
+
+    <div id="pz-member" hidden>
+      <div class="pz-bar">
+        <div><strong id="pm-name"></strong> 님의 비공개 공간 <span class="pz-hint">세션 표식 <code id="pm-token"></code></span></div>
+        <button type="button" class="pz-btn" id="btn-logout">로그아웃</button>
+      </div>
+
+      <div class="pz-grid">
+        <div class="pz-panel">
+          <h3>비공개 메모 <span class="pz-small" id="notes-count"></span></h3>
+          <ul class="pz-list" id="notes-list"></ul>
+          <form id="form-note" autocomplete="off">
+            <label for="note-title">새 메모 제목</label>
+            <input type="text" id="note-title" maxlength="60" required>
+            <label for="note-body">내용</label>
+            <textarea id="note-body" maxlength="500"></textarea>
+            <button type="submit" class="pz-btn">메모 추가</button>
+          </form>
+        </div>
+        <div class="pz-panel">
+          <h3>내 패스키 <span class="pz-small" id="pk-count"></span></h3>
+          <ul class="pz-list" id="pk-list"></ul>
+          <form id="form-addpk" autocomplete="off">
+            <label for="addpk-name">새 패스키 이름 <small>(예: 노트북)</small></label>
+            <input type="text" id="addpk-name" maxlength="30" required>
+            <button type="submit" class="pz-btn">패스키 추가</button>
+          </form>
+          <p class="pz-small pz-gap">패스키는 최대 5개입니다. 마지막 하나는 지울 수 없습니다.</p>
+        </div>
+      </div>
+
+      <div class="pz-grid">
+        <div class="pz-panel">
+          <h3>검증 기록</h3>
+          <p class="pz-small">로그인·등록·거부 기록입니다. 세션 표식은 앞 4글자만 보이게 가립니다.</p>
+          <ul class="pz-list" id="ev-list"></ul>
+        </div>
+        <div class="pz-panel">
+          <h3>직접 확인해 보기</h3>
+          <p class="pz-small">화면을 거치지 않고 서버에 바로 요청해서, 거부되는지 확인합니다.</p>
+          <button type="button" class="pz-btn" id="chk-anon">로그인 없이 내 메모 목록 요청</button>
+          <label for="chk-id">다른 계정의 메모·패스키 id <small>(그 계정으로 로그인해서 "id 복사"로 복사)</small></label>
+          <input type="text" id="chk-id" autocomplete="off">
+          <div class="pz-row">
+            <button type="button" class="pz-btn" id="chk-note-get">그 메모 보기 요청</button>
+            <button type="button" class="pz-btn danger" id="chk-note-del">그 메모 삭제 요청</button>
+            <button type="button" class="pz-btn danger" id="chk-pk-del">그 패스키 삭제 요청</button>
+          </div>
+          <pre class="pz-out" id="chk-out" aria-live="polite"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function reduced() {
+      return document.documentElement.classList.contains('motion-off') ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    // 다크/라이트 전환
+    var themeBtn = document.getElementById('theme-btn');
+    var themeLabel = document.getElementById('theme-label');
+    function syncThemeButton() {
+      var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      themeBtn.setAttribute('aria-pressed', String(dark));
+      themeLabel.textContent = dark ? '라이트 모드' : '다크 모드';
+    }
+    themeBtn.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      syncThemeButton();
+    });
+    syncThemeButton();
+
+    // 대표 3카드 가이드
+    document.querySelectorAll('.card').forEach(function (card) {
+      var button = card.querySelector('.guide-btn');
+      var wrapper = card.querySelector('.details-wrapper');
+      var animating = false;
+      button.addEventListener('click', function () {
+        if (animating) return;
+        var isOpen = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!isOpen));
+        wrapper.classList.toggle('expanded', !isOpen);
+        wrapper.setAttribute('aria-hidden', String(isOpen));
+        card.classList.toggle('is-open', !isOpen);
+        if (!reduced()) {
+          animating = true;
+          setTimeout(function () { animating = false; }, 550);
+        }
+      });
+    });
+
+    // 접이식
+    document.querySelectorAll('.acc-btn').forEach(function (btn) {
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.addEventListener('click', function () {
+        var isOpen = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        panel.classList.toggle('expanded', !isOpen);
+        panel.setAttribute('aria-hidden', String(isOpen));
+      });
+    });
+
+    var motionCheckbox = document.getElementById('motion-off');
+    motionCheckbox.addEventListener('change', function () {
+      document.documentElement.classList.toggle('motion-off', motionCheckbox.checked);
+    });
+
+    // 스크롤 진행바
+    var progress = document.getElementById('progress');
+    function updateProgress() {
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      progress.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+  </script>
+  <script src="simplewebauthn-browser.js"></script>
+  <script src="private.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+node_modules/
+.env
+.env.*
+.vercel/
+# Firebase 서비스 계정 키(JSON)는 절대 올리지 않습니다
+*firebase-adminsdk*.json
+service-account*.json

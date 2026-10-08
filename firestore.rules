@@ -1,0 +1,10 @@
+// Firestore 보안 규칙: 브라우저(클라이언트)는 아무것도 읽거나 쓸 수 없습니다.
+// 데이터는 Vercel 서버만 서비스 계정 키로 접근합니다. (서버는 이 규칙의 영향을 받지 않음)
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
