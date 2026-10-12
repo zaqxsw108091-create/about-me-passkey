@@ -1,0 +1,68 @@
+/* 나만 들어가기 (패스키) */
+  :root { --btn-bg: #1a56b0; --btn-ink: #ffffff; --danger: #b42318; --danger-rgb: 180, 35, 24; }
+  :root[data-theme="dark"] { --btn-bg: #8dbcff; --btn-ink: #0c1526; --danger: #ff9a8f; --danger-rgb: 255, 154, 143; }
+  .private-zone { margin-top: 32px; scroll-margin-top: 16px; }
+  .pz-badge {
+    font-family: "IBM Plex Mono", Consolas, monospace; font-size: 11.5px; font-weight: 500;
+    padding: 2px 8px; border-radius: 6px; color: var(--security); background: rgba(var(--security-rgb), 0.12);
+    vertical-align: middle;
+  }
+  .pz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; margin-bottom: 16px; }
+  .pz-panel {
+    background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--security);
+    border-radius: 12px; padding: 14px 16px; min-width: 0;
+  }
+  .pz-panel h3 { margin: 0 0 6px 0; font-size: 15.5px; color: var(--security); }
+  .pz-panel p { margin: 0 0 10px 0; font-size: 13.5px; line-height: 1.55; }
+  .pz-panel label { display: block; margin: 8px 0 3px 0; font-size: 12.5px; font-weight: 700; }
+  .pz-panel label small { font-weight: 400; color: var(--muted); }
+  .pz-panel input[type="text"], .pz-panel textarea {
+    width: 100%; padding: 7px 10px; font: inherit; font-size: 14px; color: var(--ink);
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px;
+  }
+  .pz-panel textarea { resize: vertical; min-height: 56px; }
+  .pz-btn {
+    padding: 6px 14px; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer;
+    color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px;
+  }
+  .pz-btn:hover { border-color: var(--link); }
+  .pz-btn.primary { color: var(--btn-ink); background: var(--btn-bg); border-color: var(--btn-bg); }
+  .pz-btn.danger { color: var(--danger); border-color: var(--danger); background: transparent; }
+  .pz-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .pz-panel form .pz-btn { margin-top: 10px; }
+  .pz-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .pz-status {
+    margin: 0 0 14px 0; padding: 9px 12px; border-radius: 8px; font-size: 14px;
+    background: var(--surface-2); border-left: 4px solid var(--link);
+  }
+  .pz-status.ok { border-left-color: var(--vibe); }
+  .pz-status.err { border-left-color: var(--danger); }
+  .pz-bar {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px;
+    margin-bottom: 14px; padding: 10px 14px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line);
+  }
+  .pz-hint { margin-left: 8px; font-size: 12.5px; color: var(--muted); }
+  .pz-list { list-style: none; margin: 0 0 8px 0; padding: 0; }
+  .pz-list li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 13.5px; line-height: 1.5; }
+  .pz-list li:first-child { border-top: 0; }
+  .pz-list .t { font-weight: 700; }
+  .pz-list .sub { display: block; font-size: 12px; color: var(--muted); }
+  .pz-list code, .pz-panel code, .pz-flow code {
+    font-family: "IBM Plex Mono", Consolas, monospace; font-size: 11.5px; padding: 1px 5px; border-radius: 5px; background: var(--surface-2);
+  }
+  .pz-list .tag { font-size: 11.5px; padding: 1px 7px; border-radius: 999px; margin-left: 6px; background: rgba(var(--vibe-rgb), 0.14); color: var(--vibe); }
+  .pz-list .bad { color: var(--danger); font-weight: 700; }
+  .pz-list .good { color: var(--vibe); font-weight: 700; }
+  .pz-small { font-size: 12.5px !important; color: var(--muted); }
+  .pz-gap { margin-top: 10px !important; }
+  .pz-explain { margin-bottom: 16px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+  .pz-explain summary { cursor: pointer; font-weight: 700; font-size: 14px; }
+  .pz-explain ul { margin: 8px 0 2px 0; padding-left: 20px; }
+  .pz-explain li { margin-bottom: 6px; font-size: 13.5px; line-height: 1.55; }
+  .pz-flow { list-style: none; margin: 0 0 16px 0; padding: 10px 16px; border: 1px dashed var(--line); border-radius: 12px; font-size: 13px; }
+  .pz-flow li { margin: 3px 0; }
+  .pz-out {
+    margin: 8px 0 0 0; padding: 8px 10px; min-height: 40px; max-height: 190px; overflow: auto; white-space: pre-wrap; word-break: break-all;
+    font-family: "IBM Plex Mono", Consolas, monospace; font-size: 11.5px; line-height: 1.5; background: var(--surface-2); border-radius: 8px;
+  }
+  @media (max-width: 800px) { .pz-grid { grid-template-columns: 1fr; } }
