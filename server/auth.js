@@ -305,6 +305,25 @@ export async function logout(ctx) {
   return { ok: true };
 }
 
+// POST /api/logout-check — "직접 확인해 보기"용.
+// 로그아웃을 실제로 하고, 곧바로 "방금 쓰던 그 쿠키 값"으로 비공개 API의 첫 관문(requireSession)을 다시 통과시켜 본다.
+// (쿠키는 HttpOnly라서 화면의 JS가 꺼내 다시 보낼 수 없어서, 서버 안에서 같은 값으로 다시 확인한다.)
+export async function logoutCheck(ctx) {
+  const sess = await requireSession(ctx);
+  await ctx.db.deleteSession(sess.hash);
+  await record(ctx, 'logout', true, 'session-deleted', { accountId: sess.accountId, token: sess.token });
+  clearSessionCookie(ctx.res, ctx.cfg);
+  const again = { req: ctx.req, res: ctx.res, cfg: ctx.cfg, db: ctx.db, _session: undefined }; // 같은 요청의 같은 쿠키
+  let replay;
+  try {
+    await requireSession(again);
+    replay = { status: 200, error: '' };
+  } catch (e) {
+    replay = { status: e.status || 500, error: e.code || 'ERROR' };
+  }
+  return { ok: true, replay };
+}
+
 // 로그인 여부 확인(공개) — 비로그인이어도 200으로 {loggedIn:false}
 export async function sessionInfo(ctx) {
   const sess = await currentSession(ctx);

@@ -315,6 +315,57 @@
     return id;
   }
 
+  // 이미 쓴 챌린지(같은 서명 본문)를 한 번 더 보내 본다: 첫 번째는 성공, 두 번째는 거부돼야 한다.
+  async function replayCheck() {
+    if (state.busy) return;
+    setBusy(true);
+    try {
+      show(['새 챌린지를 받고 패스키로 서명합니다...']);
+      var o = await api('POST', '/api/login/options', {});
+      if (!o.ok) { show(['챌린지를 받지 못했습니다: ' + o.status]); return; }
+      var asse;
+      try {
+        asse = await SW.startAuthentication({ optionsJSON: o.data.options });
+      } catch (e) {
+        show([explainError(e, '확인')]);
+        return;
+      }
+      var first = await api('POST', '/api/login/verify', { response: asse });
+      var second = await api('POST', '/api/login/verify', { response: asse });
+      show([
+        '챌린지 ' + short(o.data.options.challenge),
+        '1번째 전송(처음 쓰는 서명) → ' + first.status + ' ' + (first.data.error || 'OK'),
+        '2번째 전송(똑같은 본문 그대로) → ' + second.status + ' ' + (second.data.error || 'OK') + (second.data.message ? ' · ' + second.data.message : ''),
+      ]);
+      await refresh();
+    } catch (e) {
+      show(['서버와 통신하지 못했습니다.']);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  // 로그아웃 직전엔 200, 로그아웃 뒤 같은 쿠키 값으로는 401이어야 한다.
+  async function logoutCheck() {
+    if (state.busy) return;
+    setBusy(true);
+    try {
+      var before = await api('GET', '/api/notes');
+      var r = await api('POST', '/api/logout-check', {});
+      if (!r.ok) { show(['확인하지 못했습니다: ' + r.status + ' ' + (r.data.error || '')]); await refresh(); return; }
+      var rp = r.data.replay || {};
+      var now = await api('GET', '/api/notes');
+      show([
+        '로그아웃 직전 같은 쿠키로 GET /api/notes → ' + before.status + ' ' + (before.data.error || 'OK'),
+        '로그아웃 뒤 같은 쿠키 값으로 서버가 다시 확인 → ' + rp.status + ' ' + rp.error,
+        '로그아웃 뒤 이 브라우저로 GET /api/notes → ' + now.status + ' ' + (now.data.error || 'OK'),
+        '(이 결과를 캡처한 뒤 새로고침하면 로그아웃 화면이 됩니다)',
+      ]);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   // ─── 연결 ───────────────────────────────────────────────
   function init() {
     if (!SW || !window.PublicKeyCredential) {
@@ -360,6 +411,8 @@
       var id = targetId();
       if (id) probe('DELETE', '/api/passkeys/' + encodeURIComponent(id), 'DELETE /api/passkeys/' + short(id));
     });
+    $('chk-replay').addEventListener('click', replayCheck);
+    $('chk-logout').addEventListener('click', logoutCheck);
     refresh().catch(function () {
       setStatus('err', '서버에 연결하지 못했습니다.');
     });

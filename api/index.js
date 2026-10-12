@@ -13,6 +13,7 @@ const routes = [
   ['POST', '/api/login/options', auth.loginOptions],
   ['POST', '/api/login/verify', auth.loginVerify],
   ['POST', '/api/logout', auth.logout],
+  ['POST', '/api/logout-check', auth.logoutCheck],
   ['GET', '/api/notes', priv.listNotes],
   ['POST', '/api/notes', priv.addNote],
   ['GET', '/api/notes/:id', priv.getNote],

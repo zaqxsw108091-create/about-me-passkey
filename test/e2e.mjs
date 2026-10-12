@@ -195,6 +195,20 @@ try {
   const expired = await raw('POST', '/api/login/verify', { body: { response: { id: 'fake', rawId: 'fake', type: 'public-key', clientExtensionResults: {}, response: { clientDataJSON: cd, authenticatorData: 'AA', signature: 'AA' } } } });
   check('만료된 챌린지 → 401', expired.status === 401);
 
+  // 화면의 "직접 확인해 보기" 두 버튼 (진짜 배포에서도 같은 버튼을 누른다)
+  await page.click('#chk-replay');
+  await page.waitForFunction(() => document.getElementById('chk-out').textContent.includes('2번째'), null, { timeout: 8000 });
+  const replayOut = await page.locator('#chk-out').innerText();
+  check('버튼: 쓴 챌린지 다시 보내기 → 1번째 200, 2번째 401', /1번째[^\n]*→ 200/.test(replayOut) && /2번째[^\n]*→ 401 LOGIN_FAILED/.test(replayOut), replayOut.replace(/\n/g, ' / '));
+  await page.click('#chk-logout');
+  await page.waitForFunction(() => document.getElementById('chk-out').textContent.includes('서버가 다시 확인'), null, { timeout: 8000 });
+  const lcOut = await page.locator('#chk-out').innerText();
+  check('버튼: 로그아웃 직전 200, 뒤 같은 쿠키 값 401', /직전[^\n]*→ 200/.test(lcOut) && /다시 확인 → 401 LOGIN_REQUIRED/.test(lcOut) && /이 브라우저로[^\n]*→ 401/.test(lcOut), lcOut.replace(/\n/g, ' / '));
+  await page.reload();
+  await waitGuest();
+  await page.click('#btn-login');
+  await waitMember();
+
   // ═══ E. 패스키 삭제 ═══
   const pkNow = passkeysOf(A.id);
   const p1 = pkNow.find((p) => p.name === '내 노트북');
